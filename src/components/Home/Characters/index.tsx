@@ -46,7 +46,7 @@ export const Characters = (props: FormProps) => {
         {props.isError && (
           <span className="text-3xl font-bold">No Characters Found</span>
         )}
-        {props.isFetching && <span className="text-xl font-semibold">Buscando...</span>}
+        {props.isFetching && <span className="text-xl font-semibold">Carregando...</span>}
         <div className="flex flex-wrap items-center justify-center w-screen h-full gap-10">
           {props.data?.map((data) => {
             return (
