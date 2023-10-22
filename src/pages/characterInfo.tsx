@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { Outlet, useParams } from "react-router-dom";
-import { DataInfos } from "../components/Home/Characters";
+import { Link, useParams } from "react-router-dom";
+import { DataInfos } from "../App";
 
 interface FilteredCharacterInfos extends DataInfos {
   species: string;
@@ -25,13 +25,15 @@ export const CharacterInfos = () => {
 
   return (
     <>
-      <Outlet />
+      <nav className="w-screen bg-green-500">
+        <Link to={`/`}>Voltar</Link>
+      </nav>
       {isFetching && <span>Carregando...</span>}
       {data?.map((data: FilteredCharacterInfos) => {
         return (
-          <div key={data.id}>
+          <div key={data.id} className="flex flex-col items-center justify-center gap-1 w-fit h-fit">
             <img src={data.image} alt="Imagem do Personagem" />
-            <h1>{data.name}</h1>
+            <h1 className="text-2xl font-semibold">{data.name}</h1>
           </div>
         );
       })}

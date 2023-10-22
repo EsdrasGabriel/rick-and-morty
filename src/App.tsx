@@ -23,12 +23,14 @@ function App() {
     status: "",
     gender: "",
   });
+  const [page, setPage] = useState<number>(1)
+  console.log(page)
 
   const { data, isLoading, refetch, isError } = useQuery<DataInfos[]>({
     queryKey: ["rickAndMortyApi"],
     queryFn: async () => {
       const response = await axios.get(
-        `https://rickandmortyapi.com/api/character/?page=1&name=${dataFetch.name}&status=${dataFetch.status}&gender=${dataFetch.gender}`
+        `https://rickandmortyapi.com/api/character/?page=${page}&name=${dataFetch.name}&status=${dataFetch.status}&gender=${dataFetch.gender}`
       );
 
       return response.data.results;
@@ -37,12 +39,14 @@ function App() {
 
   useEffect(() => {
     refetch();
-  }, [dataFetch, refetch]);
+  }, [dataFetch, refetch, page]);
 
   return (
     <>
       <Form setDataFetch={setDataFetch} />
       <Characters
+        page={page}
+        setPage={setPage}
         name={dataFetch.name}
         status={dataFetch.status}
         gender={dataFetch.gender}

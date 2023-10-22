@@ -3,7 +3,7 @@ import { createBrowserRouter } from "react-router-dom";
 
 import { CharacterInfos } from "../pages/characterInfo.tsx";
 
-export const router = createBrowserRouter([
+export const routers = createBrowserRouter([
   {
     path: "/",
     element: <App />,

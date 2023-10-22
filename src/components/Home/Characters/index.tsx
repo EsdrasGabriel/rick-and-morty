@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
 import { DataInfos } from "../../../App";
+import { MdNavigateNext, MdNavigateBefore } from "react-icons/md";
 
 interface FormProps {
+  page: number;
+  setPage: React.Dispatch<React.SetStateAction<number>>;
   name: string;
   status: string;
   gender: string;
@@ -12,11 +15,39 @@ interface FormProps {
 
 export const Characters = (props: FormProps) => {
 
+  function handleNextPage() {
+    if(props.page < 42) {
+      props.setPage(props.page+1)
+    }
+  }
+  function handleBeforePage() {
+    if(props.page > 1) {
+      props.setPage(props.page-1)
+    }
+  }
+
   return (
     <>
       <section className="flex flex-col items-center justify-center gap-1 mt-10">
-        {props.isError && <span className="text-3xl font-bold">Nenhum personagem encontrado</span>}
-        <div>{props.isLoading && <p>Carregando...</p>}</div>
+        <div className="flex items-center justify-center gap-2 text-3xl font-semibold">
+          <button className="px-1 bg-green-400 rounded-lg" onClick={handleBeforePage}>
+            <MdNavigateBefore />
+          </button>
+          <span>{props.page}</span>
+          <button className="px-1 bg-green-400 rounded-lg" onClick={handleNextPage}>
+            <MdNavigateNext />
+          </button>
+        </div>
+        {props.isError && (
+          <span className="text-3xl font-bold">
+            Nenhum personagem encontrado
+          </span>
+        )}
+        <div>
+          {props.isLoading && (
+            <p className="text-3xl font-bold">Carregando...</p>
+          )}
+        </div>
         <div className="flex flex-wrap items-center justify-center w-screen h-full gap-10">
           {props.data?.map((data) => {
             return (
