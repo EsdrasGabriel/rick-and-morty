@@ -1,7 +1,8 @@
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
+import { Link } from "react-router-dom";
 
-type DataInfos = {
+export type DataInfos = {
   id: number;
   name: string;
   status: string;
@@ -32,7 +33,7 @@ export const Characters = () => {
                 key={data.id}
                 className="border-4 border-green-500 rounded-xl"
               >
-                <button>
+                <Link to={`/characterInfos/${data.id}`} className="flex flex-col items-center justify-center gap-1">
                   <img
                     src={data.image}
                     alt="Imagem do Personagem"
@@ -49,7 +50,7 @@ export const Characters = () => {
                       {data.gender}
                     </span>
                   </div>
-                </button>
+                </Link>
               </div>
             );
           })}
