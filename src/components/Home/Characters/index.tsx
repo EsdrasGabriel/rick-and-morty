@@ -1,39 +1,33 @@
-import axios from "axios";
-import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
+import { DataInfos } from "../../../App";
 
-export type DataInfos = {
-  id: number;
+interface FormProps {
   name: string;
   status: string;
   gender: string;
-  image: string;
-};
+  data: DataInfos[] | undefined;
+  isLoading: boolean;
+  isError: boolean;
+}
 
-export const Characters = () => {
-  const { data, isFetching } = useQuery<DataInfos[]>({
-    queryKey: ["repos"],
-    queryFn: async () => {
-      const response = await axios.get(
-        `https://rickandmortyapi.com/api/character/?page=2&name=${"rick"}&status=${"alive"}&gender=${"male"}`
-      );
-
-      return response.data.results;
-    },
-  });
+export const Characters = (props: FormProps) => {
 
   return (
     <>
-      <section className="flex flex-col mt-10">
-        <div>{isFetching && <p>Carregando...</p>}</div>
+      <section className="flex flex-col items-center justify-center gap-1 mt-10">
+        {props.isError && <span className="text-3xl font-bold">Nenhum personagem encontrado</span>}
+        <div>{props.isLoading && <p>Carregando...</p>}</div>
         <div className="flex flex-wrap items-center justify-center w-screen h-full gap-10">
-          {data?.map((data) => {
+          {props.data?.map((data) => {
             return (
               <div
                 key={data.id}
                 className="border-4 border-green-500 rounded-xl"
               >
-                <Link to={`/characterInfos/${data.id}`} className="flex flex-col items-center justify-center gap-1">
+                <Link
+                  to={`/characterInfos/${data.id}`}
+                  className="flex flex-col items-center justify-center gap-1"
+                >
                   <img
                     src={data.image}
                     alt="Imagem do Personagem"
