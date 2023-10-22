@@ -11,7 +11,7 @@ export type DataInfos = {
   gender: string;
   image: string;
 };
-interface DataFetch {
+export interface DataFetch {
   name: string;
   status: string;
   gender: string;

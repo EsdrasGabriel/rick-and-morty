@@ -14,15 +14,14 @@ interface FormProps {
 }
 
 export const Characters = (props: FormProps) => {
-
   function handleNextPage() {
-    if(props.page < 42) {
-      props.setPage(props.page+1)
+    if (props.page < 42) {
+      props.setPage(props.page + 1);
     }
   }
   function handleBeforePage() {
-    if(props.page > 1) {
-      props.setPage(props.page-1)
+    if (props.page > 1) {
+      props.setPage(props.page - 1);
     }
   }
 
@@ -30,22 +29,26 @@ export const Characters = (props: FormProps) => {
     <>
       <section className="flex flex-col items-center justify-center gap-1 mt-10">
         <div className="flex items-center justify-center gap-2 text-3xl font-semibold">
-          <button className="px-1 bg-green-400 rounded-lg" onClick={handleBeforePage}>
+          <button
+            className="px-1 bg-green-400 rounded-lg"
+            onClick={handleBeforePage}
+          >
             <MdNavigateBefore />
           </button>
           <span>{props.page}</span>
-          <button className="px-1 bg-green-400 rounded-lg" onClick={handleNextPage}>
+          <button
+            className="px-1 bg-green-400 rounded-lg"
+            onClick={handleNextPage}
+          >
             <MdNavigateNext />
           </button>
         </div>
         {props.isError && (
-          <span className="text-3xl font-bold">
-            Nenhum personagem encontrado
-          </span>
+          <span className="text-3xl font-bold">No Characters Found</span>
         )}
         <div>
           {props.isLoading && (
-            <p className="text-3xl font-bold">Carregando...</p>
+            <p className="text-3xl font-bold">Loading...</p>
           )}
         </div>
         <div className="flex flex-wrap items-center justify-center w-screen h-full gap-10">
