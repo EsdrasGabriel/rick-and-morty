@@ -26,7 +26,7 @@ function App() {
   const [page, setPage] = useState<number>(1)
   console.log(page)
 
-  const { data, isLoading, refetch, isError, isFetching } = useQuery<DataInfos[]>({
+  const { data, refetch, isError, isFetching } = useQuery<DataInfos[]>({
     queryKey: ["rickAndMortyApi"],
     queryFn: async () => {
       const response = await axios.get(
@@ -51,7 +51,6 @@ function App() {
         status={dataFetch.status}
         gender={dataFetch.gender}
         data={data}
-        isLoading={isLoading}
         isError={isError}
         isFetching={isFetching}
       />

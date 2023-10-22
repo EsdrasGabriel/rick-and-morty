@@ -9,7 +9,6 @@ interface FormProps {
   status: string;
   gender: string;
   data: DataInfos[] | undefined;
-  isLoading: boolean;
   isError: boolean;
   isFetching: boolean;
 }
@@ -48,11 +47,6 @@ export const Characters = (props: FormProps) => {
           <span className="text-3xl font-bold">No Characters Found</span>
         )}
         {props.isFetching && <span className="text-xl font-semibold">Buscando...</span>}
-        <div>
-          {props.isLoading && (
-            <p className="text-3xl font-bold">Loading...</p>
-          )}
-        </div>
         <div className="flex flex-wrap items-center justify-center w-screen h-full gap-10">
           {props.data?.map((data) => {
             return (
